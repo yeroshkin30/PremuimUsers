@@ -17,6 +17,9 @@
 		7C49154E2A48AEA30021AFD0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7C49154D2A48AEA30021AFD0 /* SnapKit */; };
 		7C4915502A48C5720021AFD0 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C49154F2A48C5720021AFD0 /* WebViewController.swift */; };
 		7C4915542A48E8390021AFD0 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C4915532A48E8390021AFD0 /* Roboto-Medium.ttf */; };
+		7CAF67FA2A49C5A400FF196A /* UIViewController+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF67F92A49C5A400FF196A /* UIViewController+Background.swift */; };
+		7CAF67FE2A49D34300FF196A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF67FD2A49D34300FF196A /* UIColor+Extension.swift */; };
+		7CE475AE2A4A00F3000EE36A /* GoPreiumButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE475AD2A4A00F3000EE36A /* GoPreiumButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,9 @@
 		7C49154A2A489CA10021AFD0 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		7C49154F2A48C5720021AFD0 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		7C4915532A48E8390021AFD0 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		7CAF67F92A49C5A400FF196A /* UIViewController+Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Background.swift"; sourceTree = "<group>"; };
+		7CAF67FD2A49D34300FF196A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		7CE475AD2A4A00F3000EE36A /* GoPreiumButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoPreiumButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,10 +54,6 @@
 		7C02B8E52A4883C200D9D978 = {
 			isa = PBXGroup;
 			children = (
-				7C49154A2A489CA10021AFD0 /* SettingTableViewCell.swift */,
-				7C02B9052A48842D00D9D978 /* MainViewController.swift */,
-				7C02B9072A488FAF00D9D978 /* SettingsViewController.swift */,
-				7C49154F2A48C5720021AFD0 /* WebViewController.swift */,
 				7C02B8F02A4883C200D9D978 /* PremiumUser */,
 				7C02B8EF2A4883C200D9D978 /* Products */,
 			);
@@ -68,14 +70,37 @@
 		7C02B8F02A4883C200D9D978 /* PremiumUser */ = {
 			isa = PBXGroup;
 			children = (
+				7CAF67FB2A49C6B700FF196A /* Extensions */,
+				7C49154A2A489CA10021AFD0 /* SettingTableViewCell.swift */,
+				7C02B9052A48842D00D9D978 /* MainViewController.swift */,
+				7C02B9072A488FAF00D9D978 /* SettingsViewController.swift */,
+				7C49154F2A48C5720021AFD0 /* WebViewController.swift */,
+				7CE475AD2A4A00F3000EE36A /* GoPreiumButton.swift */,
+				7CAF67FC2A49C6DE00FF196A /* help */,
+				7C02B8FF2A4883C300D9D978 /* Info.plist */,
+			);
+			path = PremiumUser;
+			sourceTree = "<group>";
+		};
+		7CAF67FB2A49C6B700FF196A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7CAF67F92A49C5A400FF196A /* UIViewController+Background.swift */,
+				7CAF67FD2A49D34300FF196A /* UIColor+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7CAF67FC2A49C6DE00FF196A /* help */ = {
+			isa = PBXGroup;
+			children = (
 				7C4915532A48E8390021AFD0 /* Roboto-Medium.ttf */,
 				7C02B8F12A4883C200D9D978 /* AppDelegate.swift */,
 				7C02B8F32A4883C200D9D978 /* SceneDelegate.swift */,
 				7C02B8FA2A4883C300D9D978 /* Assets.xcassets */,
 				7C02B8FC2A4883C300D9D978 /* LaunchScreen.storyboard */,
-				7C02B8FF2A4883C300D9D978 /* Info.plist */,
 			);
-			path = PremiumUser;
+			path = help;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,7 +185,10 @@
 				7C49154B2A489CA10021AFD0 /* SettingTableViewCell.swift in Sources */,
 				7C02B8F22A4883C200D9D978 /* AppDelegate.swift in Sources */,
 				7C02B8F42A4883C200D9D978 /* SceneDelegate.swift in Sources */,
+				7CAF67FA2A49C5A400FF196A /* UIViewController+Background.swift in Sources */,
 				7C02B9082A488FAF00D9D978 /* SettingsViewController.swift in Sources */,
+				7CE475AE2A4A00F3000EE36A /* GoPreiumButton.swift in Sources */,
+				7CAF67FE2A49D34300FF196A /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

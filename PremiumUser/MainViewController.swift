@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     }
 
     private func setup() {
-        view.backgroundColor = .white
+        setCustomBackground()
         view.addSubview(settingsButton)
 
         setupSettingsButton()

@@ -9,10 +9,10 @@ import UIKit
 import SnapKit
 import WebKit
 
-fileprivate let cellHeight: CGFloat = 55
+fileprivate let cellHeight: CGFloat = 47
 
 final class SettingsViewController: UIViewController {
-    private let goPremiumButton: UIButton = .init()
+    private let goPremiumButton: GoPremiumButton = .init()
     private let tableView: UITableView = .init()
     private let webView: WKWebView = .init(frame: .zero, configuration: WKWebViewConfiguration())
 
@@ -21,14 +21,18 @@ final class SettingsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
+
+        tableView.backgroundView = ViewWithGradient(with: .tableGradient)
         tableView.backgroundColor = .clear
-        tableView.layer.cornerRadius = 30
+        tableView.layer.cornerRadius = 20
         tableView.separatorInset = .zero
+
+        
         setup()
     }
 
     private func setup() {
-        view.backgroundColor = .black
+        setCustomBackground()
         view.addSubview(goPremiumButton)
         view.addSubview(tableView)
 
@@ -37,35 +41,18 @@ final class SettingsViewController: UIViewController {
     }
 
     func setupButtons() {
-        var config = UIButton.Configuration.plain()
-        config.image = UIImage(systemName: "heart")
-        config.imagePlacement = .leading
-        config.imagePadding = 60
-        config.title = "Go Premium"
 
-        config.attributedTitle = AttributedString(
-            "Go Premium",
-            attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: "Roboto Medium", size: 25)!])
-        )
-        config.titleAlignment = .center
-        config.baseForegroundColor = .white
-        config.preferredSymbolConfigurationForImage = .init(pointSize: 25)
-        config.background.backgroundColor = .purple.withAlphaComponent(0.5)
-        config.contentInsets =  NSDirectionalEdgeInsets(top: 0, leading: -config.imagePadding, bottom: 0, trailing: config.imagePadding)
-        config.cornerStyle = .capsule
-
-        goPremiumButton.configuration = config
     }
 
     func setupConstraints() {
         goPremiumButton.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
-            $0.leading.trailing.equalTo(view).inset(10)
+            $0.leading.trailing.equalTo(view).inset(15)
             $0.height.equalTo(cellHeight)
         }
 
         tableView.snp.makeConstraints {
-            $0.leading.trailing.equalTo(view).inset(10)
+            $0.leading.trailing.equalTo(view).inset(15)
             $0.top.equalTo(goPremiumButton.snp.bottom).offset(50)
             $0.height.equalTo(cellHeight * 4)
         }
@@ -124,13 +111,15 @@ case shareAp
     var values: (String, UIImage?) {
         switch self {
         case .supportCell:
-            return ("Support", UIImage(systemName: "envelope"))
+            return ("Support", UIImage(named: "Email"))
         case .termsCell:
-            return ("Terms & Conditios", UIImage(systemName: "backward"))
+            return ("Terms & Conditios", UIImage(named: "Terms"))
         case .rateCell:
-            return ("Rate the App", UIImage(systemName: "star.fill"))
+            return ("Rate the App", UIImage(named: "Rate"))
         case .shareAp:
-            return ("Share the App", UIImage(systemName: "arrowshape.turn.up.left.fill"))
+            return ("Share the App", UIImage(named: "Share"))
         }
     }
 }
+
+
