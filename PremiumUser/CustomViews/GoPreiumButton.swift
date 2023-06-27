@@ -28,11 +28,10 @@ class GoPremiumButton: UIButton {
 
         config.attributedTitle = AttributedString(
             "Go Premium",
-            attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: "Roboto Medium", size: 25)!])
+            attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: "Roboto Medium", size: 22)!])
         )
         config.titleAlignment = .center
         config.baseForegroundColor = .white
-        config.preferredSymbolConfigurationForImage = .init(pointSize: 25)
         config.background.backgroundColor = .clear
         config.background.customView = ViewWithGradient(with: .premiumGradient)
         config.contentInsets =  NSDirectionalEdgeInsets(top: 0, leading: -config.imagePadding, bottom: 0, trailing: config.imagePadding)

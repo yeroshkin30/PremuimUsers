@@ -37,4 +37,15 @@ extension CAGradientLayer {
 
         return layer
     }
+
+    static var navBarGradient: CAGradientLayer {
+        let layer = CAGradientLayer()
+        layer.colors = [
+            UIColor.Settings.lightBlue.withAlphaComponent(0.3).cgColor,
+            UIColor.Settings.darkBlue.withAlphaComponent(0.3).cgColor
+        ]
+
+        return layer
+    }
+
 }

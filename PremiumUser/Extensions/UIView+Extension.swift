@@ -15,8 +15,6 @@ class ViewWithGradient: UIView {
         gradientLayer.cornerRadius = 20
         super.init(frame: CGRect())
         layer.addSublayer(gradientLayer)
-        layer.masksToBounds = false
-        clipsToBounds = false
         layer.shadowColor = UIColor.black.cgColor
 
         layer.shadowOffset = CGSize(width: 5, height: 6)

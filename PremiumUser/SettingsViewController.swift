@@ -11,15 +11,30 @@ import SafariServices
 import StoreKit
 
 final class SettingsViewController: UIViewController {
+    private let navigationBarView: NavigationBarView = .init()
     private let goPremiumButton: GoPremiumButton = .init()
     private let stackView: UIStackView = .init()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true, animated: false)
         setup()
     }
 
     // MARK: - Handle touch events
+    func handleTapEvents(with cell: SettingCell) {
+        switch cell {
+        case .supportCell:
+            supportCellTapped()
+        case .termsCell:
+            termsCellTapped()
+        case .rateCell:
+            rateCellTapped()
+        case .shareApp:
+            shareCellTapped()
+        }
+    }
+
     private func supportCellTapped() {
         let url = URL(string:"https://www.apple.com")!
         let safariVC = SFSafariViewController(url: url)
@@ -64,9 +79,19 @@ final class SettingsViewController: UIViewController {
         setCustomBackground()
         view.addSubview(goPremiumButton)
         view.addSubview(stackView)
+        view.addSubview(navigationBarView)
+
+        navigationBarView.onTouchEvent = { [weak self] onEvent in
+            switch onEvent {
+            case .back:
+                self?.navigationController?.popViewController(animated: true)
+            case .settings:
+                print("settings tapped")
+            }
+        }
 
         goPremiumButton.addAction(
-            UIAction { _ in self.goPremiumButtonTapped() },
+            UIAction { _ in self.dismiss(animated: true) },
             for: .touchUpInside
         )
 
@@ -76,7 +101,7 @@ final class SettingsViewController: UIViewController {
 
     private func setupStackView() {
         stackView.axis = .vertical
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
 
         let layer = ViewWithGradient(with: .tableGradient)
         stackView.addSubview(layer)
@@ -88,46 +113,70 @@ final class SettingsViewController: UIViewController {
     }
 
     private func setupCellViewsForStack() {
-        let supportCell = SettingCellView(text: "Support", image: UIImage(named: "Email"))
-        supportCell.onTouchEvent = { [weak self] in
-            self?.supportCellTapped()
-        }
+        SettingCell.allCases.forEach { cellType in
+            let cell = SettingCellView(text: cellType.text, image: cellType.image)
+            cell.onTouchEvent = { [weak self] in
+                self?.handleTapEvents(with: cellType)
+            }
+            stackView.addArrangedSubview(cell)
 
-        let termsCell = SettingCellView(text: "Terms & Conditios", image: UIImage(named: "Terms"))
-        termsCell.onTouchEvent = { [weak self] in
-            self?.termsCellTapped()
+            if !(cellType == .shareApp) {
+                stackView.addArrangedSubview(SeparatorView())
+            }
         }
-
-        let rateCell = SettingCellView(text: "Rate the App", image: UIImage(named: "Rate"))
-        rateCell.onTouchEvent = { [weak self] in
-            self?.rateCellTapped()
-        }
-        let shareAp = SettingCellView(text: "Share the App", image: UIImage(named: "Share"), withSeparator: false)
-        shareAp.onTouchEvent = { [weak self] in
-            self?.shareCellTapped()
-        }
-
-        stackView.addArrangedSubview(supportCell)
-        stackView.addArrangedSubview(termsCell)
-        stackView.addArrangedSubview(rateCell)
-        stackView.addArrangedSubview(shareAp)
     }
 
-
-
     private func setupConstraints() {
+        navigationBarView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(69)
+            $0.leading.trailing.equalToSuperview().inset(15)
+            $0.height.equalTo(41)
+        }
+
         goPremiumButton.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            $0.top.equalTo(navigationBarView.snp.bottom).offset(70)
             $0.leading.trailing.equalTo(view).inset(15)
             $0.height.equalTo(41)
         }
 
         stackView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(15)
-            $0.height.equalTo(185)
             $0.top.equalTo(goPremiumButton.snp.bottom).offset(50)
         }
     }
-}
 
+
+    enum SettingCell: Int, CaseIterable {
+        case supportCell
+        case termsCell
+        case rateCell
+        case shareApp
+
+        var text: String {
+            switch self {
+            case .supportCell:
+                return "Support"
+            case .termsCell:
+                return "Terms & Conditios"
+            case .rateCell:
+                return "Rate the App"
+            case .shareApp:
+                return "Share the App"
+            }
+        }
+
+        var image: UIImage? {
+            switch self {
+            case .supportCell:
+                return UIImage(named: "Email")
+            case .termsCell:
+                return UIImage(named: "Terms")
+            case .rateCell:
+                return UIImage(named: "Rate")
+            case .shareApp:
+                return UIImage(named: "Share")
+            }
+        }
+    }
+}
 
