@@ -6,21 +6,18 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewWithGradient: UIView {
     let gradientLayer: CAGradientLayer
 
     init(with gradient: CAGradientLayer) {
         self.gradientLayer = gradient
-        gradientLayer.cornerRadius = 20
         super.init(frame: CGRect())
-        layer.addSublayer(gradientLayer)
-        layer.shadowColor = UIColor.black.cgColor
 
-        layer.shadowOffset = CGSize(width: 5, height: 6)
-        layer.shadowRadius = 4
-        layer.shadowOpacity = 0.8
-        layer.cornerRadius = 20
+        gradientLayer.cornerRadius = 20
+        layer.addSublayer(gradientLayer)
+        addShadows()
     }
 
     required init?(coder: NSCoder) {
@@ -29,5 +26,15 @@ class ViewWithGradient: UIView {
 
     override func layoutSubviews() {
         gradientLayer.frame = bounds
+    }
+}
+
+extension UIView {
+    func addShadows() {
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 5, height: 6)
+        layer.shadowRadius = 4
+        layer.shadowOpacity = 0.8
+        layer.cornerRadius = 20
     }
 }

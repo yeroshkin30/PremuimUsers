@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import SnapKit
 
 class MainViewController: UIViewController {
-    private let settingsButton: UIButton = .init()
-
+    private let settingsButton: SettingsButton = .init()
+    private let mainScreeLabel: UILabel = .init()
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -18,36 +19,30 @@ class MainViewController: UIViewController {
     private func setup() {
         setCustomBackground()
         view.addSubview(settingsButton)
+        view.addSubview(mainScreeLabel)
 
-        setupSettingsButton()
+        mainScreeLabel.text = "Main Screen"
+        mainScreeLabel.font = UIFont(name: "Roboto-Bold", size: 26)
+        mainScreeLabel.textColor = .white
+
+        settingsButton.addAction(
+            UIAction { [weak self] _ in self?.show(SettingsViewController(), sender: nil) },
+            for: .touchUpInside
+        )
+
         setupConstraints()
     }
 
-    private func setupSettingsButton() {
-        var config = UIButton.Configuration.plain()
-        config.title = "SETTINGS"
-        config.baseForegroundColor = .white
-        config.background.backgroundColor = .purple
-        config.cornerStyle = .capsule
-        settingsButton.configuration = config
-
-        settingsButton.addAction(
-            UIAction { _ in
-                let settingsVC = SettingsViewController()
-                self.show(settingsVC, sender: nil)
-            },
-            for: .touchUpInside
-        )
-    }
-
     private func setupConstraints() {
-        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        settingsButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(40)
+            $0.leading.trailing.equalToSuperview().inset(70)
+            $0.height.equalTo(40)
+        }
 
-        NSLayoutConstraint.activate([
-            settingsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            settingsButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40),
-            settingsButton.widthAnchor.constraint(equalToConstant: 230),
-            settingsButton.heightAnchor.constraint(equalToConstant: 40)
-        ])
+        mainScreeLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(105)
+            $0.centerX.equalToSuperview()
+        }
     }
 }

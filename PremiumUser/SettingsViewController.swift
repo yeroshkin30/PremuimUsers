@@ -91,7 +91,7 @@ final class SettingsViewController: UIViewController {
         }
 
         goPremiumButton.addAction(
-            UIAction { _ in self.dismiss(animated: true) },
+            UIAction { [weak self] _ in self?.goPremiumButtonTapped() },
             for: .touchUpInside
         )
 
@@ -103,9 +103,9 @@ final class SettingsViewController: UIViewController {
         stackView.axis = .vertical
         stackView.distribution = .fill
 
-        let layer = ViewWithGradient(with: .tableGradient)
-        stackView.addSubview(layer)
-        layer.snp.makeConstraints {
+        let gradientView = ViewWithGradient(with: .tableGradient)
+        stackView.addSubview(gradientView)
+        gradientView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
 

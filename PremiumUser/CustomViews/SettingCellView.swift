@@ -12,17 +12,15 @@ class SettingCellView: UIView {
 
     private let imageView: UIImageView = .init()
     private let label: UILabel = .init()
-    private let separatorView: UIView = .init()
     private let chevronView: UIImageView = .init(image: UIImage(named: "chevron-right"))
     var onTouchEvent: (() -> Void)?
 
 
-    init(text: String, image: UIImage?, withSeparator: Bool = false) {
+    init(text: String, image: UIImage?) {
         super.init(frame: CGRect())
         self.label.text = text
         self.imageView.image = image
-        if withSeparator { setupSeparator() }
-
+        layer.masksToBounds = true
         setup()
     }
 
@@ -58,16 +56,6 @@ class SettingCellView: UIView {
         label.textColor = .white
 
         setupConstraints()
-    }
-
-    private func setupSeparator() {
-        addSubview(separatorView)
-        separatorView.backgroundColor = UIColor.Settings.separator
-        separatorView.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
-            $0.width.equalTo(self.snp.width)
-            $0.height.equalTo(1)
-        }
     }
 
     private func setupConstraints() {

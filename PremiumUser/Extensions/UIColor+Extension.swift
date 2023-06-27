@@ -15,6 +15,11 @@ extension UIColor {
         static let goPremium = UIColor(named: "goPremium")!
         static let goPremiumLight = UIColor(named: "goPremiumLight")!
     }
+
+    enum MainScreen {
+        static let settingsButton = UIColor(red: 219/255, green: 35/255, blue: 167/255, alpha: 1)
+        static let settingsShadow = UIColor(red: 31/255, green: 27/255, blue: 27/255, alpha: 0.75)
+    }
 }
 
 extension CAGradientLayer {

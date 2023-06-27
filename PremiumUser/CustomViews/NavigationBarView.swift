@@ -31,9 +31,9 @@ class NavigationBarView: UIView {
         addSubview(settingsButton)
         backgroundColor = .clear
 
-        let layer = ViewWithGradient(with: .navBarGradient)
-        insertSubview(layer, at: 0)
-        layer.snp.makeConstraints {
+        let gradientView = ViewWithGradient(with: .navBarGradient)
+        insertSubview(gradientView, at: 0)
+        gradientView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
 

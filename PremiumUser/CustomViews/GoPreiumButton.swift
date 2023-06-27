@@ -24,8 +24,6 @@ class GoPremiumButton: UIButton {
         config.image = UIImage(named: "diamond")
         config.imagePlacement = .leading
         config.imagePadding = 30
-        config.title = "Go Premium"
-
         config.attributedTitle = AttributedString(
             "Go Premium",
             attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: "Roboto Medium", size: 22)!])
@@ -38,5 +36,7 @@ class GoPremiumButton: UIButton {
         config.cornerStyle = .capsule
 
         configuration = config
+
+        addShadows()
     }
 }
