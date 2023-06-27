@@ -7,117 +7,125 @@
 
 import UIKit
 import SnapKit
-import WebKit
-
-fileprivate let cellHeight: CGFloat = 47
+import SafariServices
+import StoreKit
 
 final class SettingsViewController: UIViewController {
     private let goPremiumButton: GoPremiumButton = .init()
-    private let tableView: UITableView = .init()
-    private let webView: WKWebView = .init(frame: .zero, configuration: WKWebViewConfiguration())
+    private let stackView: UIStackView = .init()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
-
-        tableView.backgroundView = ViewWithGradient(with: .tableGradient)
-        tableView.backgroundColor = .clear
-        tableView.layer.cornerRadius = 20
-        tableView.separatorInset = .zero
-
-        
         setup()
     }
 
+    // MARK: - Handle touch events
+    private func supportCellTapped() {
+        let url = URL(string:"https://www.apple.com")!
+        let safariVC = SFSafariViewController(url: url)
+        present(safariVC, animated: true)
+    }
+
+    private func termsCellTapped() {
+        let url = URL(string:"https://www.google.com")!
+        let safariVC = SFSafariViewController(url: url)
+        present(safariVC, animated: true)
+    }
+
+    private func rateCellTapped() {
+        guard let scene = view.window?.windowScene else { return }
+        SKStoreReviewController.requestReview(in: scene)
+    }
+
+    private func shareCellTapped() {
+        let activityController = UIActivityViewController(
+            activityItems: ["https://www.google.com"],
+            applicationActivities: nil
+        )
+        present(activityController, animated: true, completion: nil)
+    }
+
+    private func goPremiumButtonTapped() {
+        let alertController = UIAlertController(
+            title: "Congratulations!",
+            message: "You bought a subscription.",
+            preferredStyle: .alert
+        )
+
+        let cancelAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true, completion: nil)
+    }
+
+
+    // MARK: - Setup
     private func setup() {
         setCustomBackground()
         view.addSubview(goPremiumButton)
-        view.addSubview(tableView)
+        view.addSubview(stackView)
 
-        setupButtons()
+        goPremiumButton.addAction(
+            UIAction { _ in self.goPremiumButtonTapped() },
+            for: .touchUpInside
+        )
+
+        setupStackView()
         setupConstraints()
     }
 
-    func setupButtons() {
+    private func setupStackView() {
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
 
+        let layer = ViewWithGradient(with: .tableGradient)
+        stackView.addSubview(layer)
+        layer.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
+        setupCellViewsForStack()
     }
 
-    func setupConstraints() {
+    private func setupCellViewsForStack() {
+        let supportCell = SettingCellView(text: "Support", image: UIImage(named: "Email"))
+        supportCell.onTouchEvent = { [weak self] in
+            self?.supportCellTapped()
+        }
+
+        let termsCell = SettingCellView(text: "Terms & Conditios", image: UIImage(named: "Terms"))
+        termsCell.onTouchEvent = { [weak self] in
+            self?.termsCellTapped()
+        }
+
+        let rateCell = SettingCellView(text: "Rate the App", image: UIImage(named: "Rate"))
+        rateCell.onTouchEvent = { [weak self] in
+            self?.rateCellTapped()
+        }
+        let shareAp = SettingCellView(text: "Share the App", image: UIImage(named: "Share"), withSeparator: false)
+        shareAp.onTouchEvent = { [weak self] in
+            self?.shareCellTapped()
+        }
+
+        stackView.addArrangedSubview(supportCell)
+        stackView.addArrangedSubview(termsCell)
+        stackView.addArrangedSubview(rateCell)
+        stackView.addArrangedSubview(shareAp)
+    }
+
+
+
+    private func setupConstraints() {
         goPremiumButton.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             $0.leading.trailing.equalTo(view).inset(15)
-            $0.height.equalTo(cellHeight)
+            $0.height.equalTo(41)
         }
 
-        tableView.snp.makeConstraints {
-            $0.leading.trailing.equalTo(view).inset(15)
+        stackView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(15)
+            $0.height.equalTo(185)
             $0.top.equalTo(goPremiumButton.snp.bottom).offset(50)
-            $0.height.equalTo(cellHeight * 4)
-        }
-    }
-}
-
-
-//MARK: - DataSource
-extension SettingsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.identifier) as! SettingTableViewCell
-
-        let setting = SettingCell(rawValue: indexPath.row)!
-        cell.configure(with: setting.values)
-
-        return cell
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeight
-    }
-}
-
-
-//MARK: - Delegete
-extension SettingsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case SettingCell.supportCell.rawValue:
-            let supportVC = WebViewController(urlForWebView: URL(string:"https://www.apple.com")!)
-            present(supportVC, animated: true)
-        case SettingCell.termsCell.rawValue:
-            print("Test")
-        case SettingCell.rateCell.rawValue:
-            print("Test")
-        case SettingCell.shareAp.rawValue:
-            print("Test")
-        default:
-            return
-        }
-
-    }
-}
-
-
-//MARK: - SettingConfiguration
-enum SettingCell: Int {
-case supportCell
-case termsCell
-case rateCell
-case shareAp
-
-    var values: (String, UIImage?) {
-        switch self {
-        case .supportCell:
-            return ("Support", UIImage(named: "Email"))
-        case .termsCell:
-            return ("Terms & Conditios", UIImage(named: "Terms"))
-        case .rateCell:
-            return ("Rate the App", UIImage(named: "Rate"))
-        case .shareAp:
-            return ("Share the App", UIImage(named: "Share"))
         }
     }
 }

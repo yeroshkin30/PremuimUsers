@@ -7,26 +7,6 @@
 
 import UIKit
 
-class ViewWithGradient: UIView {
-    let gradientLayer: CAGradientLayer
-
-    init(with gradient: CAGradientLayer) {
-        self.gradientLayer = gradient
-        super.init(frame: CGRect())
-        layer.addSublayer(gradientLayer)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override func layoutSubviews() {
-        gradientLayer.frame = bounds
-    }
-}
-
-
-
 extension UIColor {
     enum Settings {
         static let separator = UIColor(named: "SeparatorColor")
@@ -40,14 +20,20 @@ extension UIColor {
 extension CAGradientLayer {
     static var premiumGradient: CAGradientLayer {
         let layer = CAGradientLayer()
-        layer.colors = [ UIColor.Settings.goPremiumLight, UIColor.Settings.goPremium]
+        layer.colors = [
+            UIColor.Settings.goPremium.withAlphaComponent(0.75).cgColor,
+            UIColor.Settings.goPremiumLight.withAlphaComponent(0.75).cgColor
+        ]
 
         return layer
     }
 
     static var tableGradient: CAGradientLayer {
         let layer = CAGradientLayer()
-        layer.colors = [ UIColor.Settings.lightBlue, UIColor.Settings.darkBlue]
+        layer.colors = [
+            UIColor.Settings.lightBlue.withAlphaComponent(0.65).cgColor,
+            UIColor.Settings.darkBlue.withAlphaComponent(0.65).cgColor
+        ]
 
         return layer
     }
