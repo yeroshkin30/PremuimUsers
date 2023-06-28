@@ -30,7 +30,6 @@ class SettingsButton: UIButton {
             NSAttributedString.Key.foregroundColor: UIColor.white,
             NSAttributedString.Key.strokeWidth: -1,
             NSAttributedString.Key.shadow: shadow
-
         ]
 
         var config = UIButton.Configuration.plain()

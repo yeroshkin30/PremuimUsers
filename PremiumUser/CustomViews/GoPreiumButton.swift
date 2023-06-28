@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import SnapKit
 
 class GoPremiumButton: UIButton {
+    private let diamondView: UIImageView = .init(image: UIImage(named: "diamond"))
 
     init() {
         super.init(frame: CGRect())
@@ -20,9 +22,6 @@ class GoPremiumButton: UIButton {
 
     func setupButton() {
         var config = UIButton.Configuration.plain()
-        config.image = UIImage(named: "diamond")
-        config.imagePlacement = .leading
-        config.imagePadding = 30
         config.attributedTitle = AttributedString(
             "Go Premium",
             attributes: AttributeContainer([NSAttributedString.Key.font : UIFont(name: "Roboto Medium", size: 22)!])
@@ -31,10 +30,18 @@ class GoPremiumButton: UIButton {
         config.baseForegroundColor = .white
         config.background.backgroundColor = .clear
         config.background.customView = ViewWithGradient(with: .premiumGradient)
-        config.contentInsets =  NSDirectionalEdgeInsets(top: 0, leading: -config.imagePadding, bottom: 0, trailing: config.imagePadding)
         config.cornerStyle = .capsule
 
         configuration = config
+
+        //imagesetup
+        addSubview(diamondView)
+        diamondView.contentMode = .scaleAspectFit
+        diamondView.backgroundColor = .clear
+        diamondView.snp.makeConstraints {
+            $0.height.equalToSuperview()
+            $0.leading.equalToSuperview().inset(15)
+        }
 
         addShadows()
     }
