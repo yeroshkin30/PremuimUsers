@@ -8,11 +8,50 @@
 import UIKit
 
 class NavigationBarView: UIView {
-    private let label: UILabel = .init()
-    private let backButton: UIButton = .init()
-    private let settingsButton: UIButton = .init()
-    
+
+    // MARK: - Private properties
+
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Roboto-Light", size: 20)
+        label.textColor = .white
+        label.text = "Settings"
+
+        return label
+    }()
+
+    private lazy var backButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "back"), for: .normal)
+        button.addAction(
+            UIAction { [weak self] _ in
+                self?.onTouchEvent?(.back)
+            },
+            for: .touchUpInside
+        )
+
+        return button
+    }()
+
+    private lazy var settingsButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "settings"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.addAction(
+            UIAction { [weak self] _ in
+                self?.onTouchEvent?(.settings)
+            },
+            for: .touchUpInside
+        )
+
+        return button
+    }()
+
+    // MARK: - Public properties
+
     var onTouchEvent: ((TouchEvents) -> Void)?
+
+    // MARK: - Initializers
 
     init() {
         super.init(frame: CGRect())
@@ -23,59 +62,41 @@ class NavigationBarView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Setup
 
-    // MARK: - Touches
-    func setup() {
+    private func setup() {
         addSubview(backButton)
-        addSubview(label)
+        addSubview(titleLabel)
         addSubview(settingsButton)
         backgroundColor = .clear
 
         let gradientView = ViewWithGradient(with: .navBarGradient)
         insertSubview(gradientView, at: 0)
-        gradientView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
+        gradientView.layout(in: self)
 
-        label.font = UIFont(name: "Roboto-Light", size: 20)
-        label.textColor = .white
-        label.text = "Settings"
-
-        setupButton()
         setupConstraints()
     }
 
-    private func setupButton() {
-        backButton.setImage(UIImage(named: "back"), for: .normal)
-        backButton.addAction(
-            UIAction { [weak self] _ in self?.onTouchEvent?(.back) },
-            for: .touchUpInside
-        )
-
-        settingsButton.setImage(UIImage(named: "settings"), for: .normal)
-        settingsButton.imageView?.contentMode = .scaleAspectFit
-        settingsButton.addAction(
-            UIAction { [weak self] _ in self?.onTouchEvent?(.settings)},
-            for: .touchUpInside
-        )
-    }
-
     private func setupConstraints() {
-        backButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(10)
-            $0.centerY.equalToSuperview()
-            $0.height.width.equalTo(30)
+        backButton.layout {
+            $0.leading == leadingAnchor + 10
+            $0.centerY == centerYAnchor
+            $0.height == 30
+            $0.width == 30
         }
 
-        label.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview()
-            $0.center.equalTo(self.snp.center)
+        titleLabel.layout {
+            $0.top == topAnchor
+            $0.bottom == bottomAnchor
+            $0.centerX == centerXAnchor
+            $0.centerY == centerYAnchor
         }
 
-        settingsButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(15)
-            $0.centerY.equalToSuperview()
-            $0.height.width.equalTo(30)
+        settingsButton.layout {
+            $0.trailing == trailingAnchor - 15
+            $0.centerY == centerYAnchor
+            $0.height == 30
+            $0.width == 30
         }
     }
 

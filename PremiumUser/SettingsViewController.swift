@@ -6,15 +6,29 @@
 //
 
 import UIKit
-import SnapKit
 import SafariServices
 import StoreKit
 
 final class SettingsViewController: UIViewController {
-    private let navigationBarView: NavigationBarView = .init()
-    private let goPremiumButton: GoPremiumButton = .init()
-    private let tableBackView = ViewWithGradient(with: .tableGradient)
-    private let stackView: UIStackView = .init()
+
+    // MARK: - Private properties
+
+    private let navigationBarView = NavigationBarView()
+    private let mainView = SettingsView()
+    private let modelItems: [SettingsCellModel]
+
+    // MARK: - Initializers
+
+    init(items: [SettingsCellModel]) {
+        self.modelItems = items
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,29 +38,15 @@ final class SettingsViewController: UIViewController {
     }
 
     // MARK: - Handle touch events
-    private func handleTapEvents(with cell: SettingCell) {
-        switch cell {
-        case .supportCell:
-            supportCellTapped()
-        case .termsCell:
-            termsCellTapped()
-        case .rateCell:
-            rateCellTapped()
-        case .shareApp:
-            shareCellTapped()
-        }
-    }
 
     private func supportCellTapped() {
         let url = URL(string:"https://www.apple.com")!
-        let safariVC = SFSafariViewController(url: url)
-        present(safariVC, animated: true)
+        showSafariVC(with: url)
     }
 
     private func termsCellTapped() {
         let url = URL(string:"https://www.google.com")!
-        let safariVC = SFSafariViewController(url: url)
-        present(safariVC, animated: true)
+        showSafariVC(with: url)
     }
 
     private func rateCellTapped() {
@@ -62,6 +62,11 @@ final class SettingsViewController: UIViewController {
         present(activityController, animated: true, completion: nil)
     }
 
+    private func showSafariVC(with url: URL) {
+        let safariVC = SFSafariViewController(url: url)
+        present(safariVC, animated: true)
+    }
+    
     private func goPremiumButtonTapped() {
         let alertController = UIAlertController(
             title: "Congratulations!",
@@ -77,20 +82,18 @@ final class SettingsViewController: UIViewController {
 
 
     // MARK: - Setup
+
     private func setup() {
         setCustomBackground()
+        view = mainView
+        mainView.setupTableView(dataSource: self, delegate: self)
         view.addSubview(navigationBarView)
-        view.addSubview(goPremiumButton)
-        view.addSubview(tableBackView)
-        tableBackView.addSubview(stackView)
 
-        setupEvents()
-        setupStackView()
+        setupNavigationEvents()
         setupConstraints()
     }
 
-    private func setupEvents() {
-        //Navigation Bar Actions
+    private func setupNavigationEvents() {
         navigationBarView.onTouchEvent = { [weak self] onEvent in
             switch onEvent {
             case .back:
@@ -99,89 +102,48 @@ final class SettingsViewController: UIViewController {
                 print("settings tapped")
             }
         }
-
-        goPremiumButton.addAction(
-            UIAction { [weak self] _ in self?.goPremiumButtonTapped() },
-            for: .touchUpInside
-        )
-    }
-
-    private func setupStackView() {
-        stackView.axis = .vertical
-        stackView.distribution = .fill
-        stackView.layer.cornerRadius = 20
-        stackView.layer.masksToBounds = true
-        setupCellViewsForStack()
-    }
-
-    private func setupCellViewsForStack() {
-        SettingCell.allCases.forEach { cellType in
-            let cell = SettingCellView(text: cellType.text, image: cellType.image)
-            cell.onTouchEvent = { [weak self] in
-                self?.handleTapEvents(with: cellType)
-            }
-            stackView.addArrangedSubview(cell)
-
-            if !(cellType == .shareApp) {
-                stackView.addArrangedSubview(SeparatorView())
-            }
-        }
     }
 
     private func setupConstraints() {
-        navigationBarView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
-            $0.leading.trailing.equalToSuperview().inset(15)
-            $0.height.equalTo(41)
-        }
-
-        goPremiumButton.snp.makeConstraints {
-            $0.top.equalTo(navigationBarView.snp.bottom).offset(70)
-            $0.leading.trailing.equalTo(view).inset(15)
-            $0.height.equalTo(41)
-        }
-
-        tableBackView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(15)
-            $0.top.equalTo(goPremiumButton.snp.bottom).offset(50)
-            $0.height.equalTo(187)
-        }
-
-        stackView.snp.makeConstraints {
-            $0.edges.equalTo(tableBackView)
+        navigationBarView.layout {
+            $0.top == view.safeAreaLayoutGuide.topAnchor + 10
+            $0.leading == view.leadingAnchor + 15
+            $0.trailing == view.trailingAnchor - 15
+            $0.height == 41
         }
     }
+}
 
-    enum SettingCell: Int, CaseIterable {
-        case supportCell
-        case termsCell
-        case rateCell
-        case shareApp
+// MARK: - Table DataSource
 
-        var text: String {
-            switch self {
-            case .supportCell:
-                return "Support"
-            case .termsCell:
-                return "Terms & Conditios"
-            case .rateCell:
-                return "Rate the App"
-            case .shareApp:
-                return "Share the App"
-            }
-        }
+extension SettingsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return modelItems.count
+    }
 
-        var image: UIImage? {
-            switch self {
-            case .supportCell:
-                return UIImage(named: "Email")
-            case .termsCell:
-                return UIImage(named: "Terms")
-            case .rateCell:
-                return UIImage(named: "Rate")
-            case .shareApp:
-                return UIImage(named: "Share")
-            }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! SettingsViewCell
+
+        let model = modelItems[indexPath.row]
+        cell.configure(with: model)
+
+        return cell
+    }
+}
+
+// MARK: - Table Delegate
+
+extension SettingsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch SettingsItem.allCases[indexPath.row] {
+        case .supportCell:
+            supportCellTapped()
+        case .termsCell:
+            termsCellTapped()
+        case .rateCell:
+            rateCellTapped()
+        case .shareApp:
+            shareCellTapped()
         }
     }
 }

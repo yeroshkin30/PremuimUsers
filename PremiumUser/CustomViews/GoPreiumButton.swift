@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 class GoPremiumButton: UIButton {
     private let diamondView: UIImageView = .init(image: UIImage(named: "diamond"))
@@ -38,9 +37,9 @@ class GoPremiumButton: UIButton {
         addSubview(diamondView)
         diamondView.contentMode = .scaleAspectFit
         diamondView.backgroundColor = .clear
-        diamondView.snp.makeConstraints {
-            $0.height.equalToSuperview()
-            $0.leading.equalToSuperview().inset(15)
+        diamondView.layout {
+            $0.height == heightAnchor
+            $0.leading == leadingAnchor + 15
         }
 
         addShadows()
