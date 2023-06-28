@@ -13,16 +13,18 @@ import StoreKit
 final class SettingsViewController: UIViewController {
     private let navigationBarView: NavigationBarView = .init()
     private let goPremiumButton: GoPremiumButton = .init()
+    private let tableBackView = ViewWithGradient(with: .tableGradient)
     private let stackView: UIStackView = .init()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
+
         setup()
     }
 
     // MARK: - Handle touch events
-    func handleTapEvents(with cell: SettingCell) {
+    private func handleTapEvents(with cell: SettingCell) {
         switch cell {
         case .supportCell:
             supportCellTapped()
@@ -77,10 +79,18 @@ final class SettingsViewController: UIViewController {
     // MARK: - Setup
     private func setup() {
         setCustomBackground()
-        view.addSubview(goPremiumButton)
-        view.addSubview(stackView)
         view.addSubview(navigationBarView)
+        view.addSubview(goPremiumButton)
+        view.addSubview(tableBackView)
+        tableBackView.addSubview(stackView)
 
+        setupEvents()
+        setupStackView()
+        setupConstraints()
+    }
+
+    private func setupEvents() {
+        //Navigation Bar Actions
         navigationBarView.onTouchEvent = { [weak self] onEvent in
             switch onEvent {
             case .back:
@@ -94,21 +104,13 @@ final class SettingsViewController: UIViewController {
             UIAction { [weak self] _ in self?.goPremiumButtonTapped() },
             for: .touchUpInside
         )
-
-        setupStackView()
-        setupConstraints()
     }
 
     private func setupStackView() {
         stackView.axis = .vertical
         stackView.distribution = .fill
-
-        let gradientView = ViewWithGradient(with: .tableGradient)
-        stackView.addSubview(gradientView)
-        gradientView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-
+        stackView.layer.cornerRadius = 20
+        stackView.layer.masksToBounds = true
         setupCellViewsForStack()
     }
 
@@ -128,7 +130,7 @@ final class SettingsViewController: UIViewController {
 
     private func setupConstraints() {
         navigationBarView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(69)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
             $0.leading.trailing.equalToSuperview().inset(15)
             $0.height.equalTo(41)
         }
@@ -139,12 +141,16 @@ final class SettingsViewController: UIViewController {
             $0.height.equalTo(41)
         }
 
-        stackView.snp.makeConstraints {
+        tableBackView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(15)
             $0.top.equalTo(goPremiumButton.snp.bottom).offset(50)
+            $0.height.equalTo(187)
+        }
+
+        stackView.snp.makeConstraints {
+            $0.edges.equalTo(tableBackView)
         }
     }
-
 
     enum SettingCell: Int, CaseIterable {
         case supportCell
@@ -179,4 +185,3 @@ final class SettingsViewController: UIViewController {
         }
     }
 }
-

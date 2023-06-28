@@ -15,12 +15,11 @@ class SettingCellView: UIView {
     private let chevronView: UIImageView = .init(image: UIImage(named: "chevron-right"))
     var onTouchEvent: (() -> Void)?
 
-
     init(text: String, image: UIImage?) {
         super.init(frame: CGRect())
         self.label.text = text
         self.imageView.image = image
-        layer.masksToBounds = true
+
         setup()
     }
 

@@ -6,6 +6,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -15,17 +20,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="xXa-XP-GVW">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="xXa-XP-GVW">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bigDiamond" translatesAutoresizingMaskIntoConstraints="NO" id="A8t-1f-3Jg">
+                                <rect key="frame" x="9" y="178" width="375" height="396"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FIND YOUR TREASURE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09v-hd-9VL">
+                                <rect key="frame" x="63.666666666666657" y="464" width="266" height="30.666666666666686"/>
+                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="26"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="xXa-XP-GVW" secondAttribute="bottom" id="02Z-T5-wJt"/>
+                            <constraint firstItem="A8t-1f-3Jg" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-50" id="CZw-dw-Teo"/>
                             <constraint firstItem="xXa-XP-GVW" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Hzd-AE-yBO"/>
                             <constraint firstItem="xXa-XP-GVW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="P5e-1S-BTT"/>
+                            <constraint firstItem="09v-hd-9VL" firstAttribute="top" secondItem="A8t-1f-3Jg" secondAttribute="bottom" constant="-110" id="a2k-hN-JtL"/>
                             <constraint firstItem="xXa-XP-GVW" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="hOJ-Gt-nQE"/>
+                            <constraint firstItem="09v-hd-9VL" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="jsL-oS-8HA"/>
+                            <constraint firstItem="A8t-1f-3Jg" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="zmz-dP-r3F"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -36,5 +54,6 @@
     </scenes>
     <resources>
         <image name="background" width="374" height="812"/>
+        <image name="bigDiamond" width="375" height="396"/>
     </resources>
 </document>

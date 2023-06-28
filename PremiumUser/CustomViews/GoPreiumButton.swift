@@ -12,7 +12,6 @@ class GoPremiumButton: UIButton {
     init() {
         super.init(frame: CGRect())
         setupButton()
-        clipsToBounds = false
     }
 
     required init?(coder: NSCoder) {

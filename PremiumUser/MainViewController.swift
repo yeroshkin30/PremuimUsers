@@ -41,7 +41,7 @@ class MainViewController: UIViewController {
         }
 
         mainScreeLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(105)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(30)
             $0.centerX.equalToSuperview()
         }
     }
