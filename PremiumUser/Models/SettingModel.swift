@@ -23,7 +23,7 @@ enum SettingsItem: String, CaseIterable {
         case .supportCell:
             return "Support"
         case .termsCell:
-            return "Terms & Conditios"
+            return "Terms & Conditions"
         case .rateCell:
             return "Rate the App"
         case .shareApp:
@@ -34,13 +34,13 @@ enum SettingsItem: String, CaseIterable {
     var image: UIImage {
         switch self {
         case .supportCell:
-            return UIImage(named: "Email")!
+            return R.image.email()!
         case .termsCell:
-            return UIImage(named: "Terms")!
+            return R.image.terms()!
         case .rateCell:
-            return UIImage(named: "Rate")!
+            return R.image.rate()!
         case .shareApp:
-            return UIImage(named: "Share")!
+            return R.image.share()!
         }
     }
 

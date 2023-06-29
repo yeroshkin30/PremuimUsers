@@ -19,9 +19,8 @@ extension UIView {
 
 extension UIView {
     func setCustomBackground() {
-        let background = UIImageView(image: UIImage(named: "background"))
+        let background = UIImageView(image: R.image.background())
         background.frame = bounds
         insertSubview(background, at: 0)
     }
 }
-

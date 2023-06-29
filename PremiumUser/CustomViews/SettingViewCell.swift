@@ -16,7 +16,7 @@ final class SettingsViewCell: UITableViewCell {
 
     private let separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = .Settings.separator
+        view.backgroundColor = R.color.separatorColor()!
 
         return view
     }()

@@ -1,0 +1,6 @@
+framework module Pods_PremiumUser {
+  umbrella header "Pods-PremiumUser-umbrella.h"
+
+  export *
+  module * { export * }
+}

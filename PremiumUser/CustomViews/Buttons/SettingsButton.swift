@@ -20,7 +20,7 @@ final class SettingsButton: UIButton {
 
     func setupButton() {
         let shadow = NSShadow()
-        shadow.shadowColor = UIColor.MainScreen.settingsShadow
+        shadow.shadowColor = R.color.settingsShadow()!
         shadow.shadowOffset = CGSize(width: 0, height: 2)
         shadow.shadowBlurRadius = 5
 
@@ -37,7 +37,7 @@ final class SettingsButton: UIButton {
             "SETTINGS",
             attributes: AttributeContainer(fontAttributes)
         )
-        config.background.backgroundColor = .MainScreen.settingsButton
+        config.background.backgroundColor = R.color.settingsButton()
         config.cornerStyle = .capsule
         configuration = config
 
