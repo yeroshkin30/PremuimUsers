@@ -36,6 +36,7 @@ final class SettingsView: UIView {
     private func setupView() {
         addSubview(goPremiumButton)
         addSubview(containerView)
+        containerView.addSubview(settingsTableView)
 
         setupEvents()
         setupConstraints()
@@ -64,6 +65,7 @@ final class SettingsView: UIView {
         }
         containerView.layout {
             $0.leading == leadingAnchor + 15
+            $0.trailing == trailingAnchor - 15
             $0.top == goPremiumButton.bottomAnchor + 50
             $0.height == 187
         }

@@ -27,6 +27,7 @@ final class SettingsViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupView()
     }
 
     required init?(coder: NSCoder) {
@@ -65,7 +66,7 @@ final class SettingsViewCell: UITableViewCell {
         }
 
         chevronView.layout {
-            $0.leading == leadingAnchor + 15
+            $0.trailing == trailingAnchor - 15
             $0.top == topAnchor + 10
             $0.bottom == bottomAnchor + 10
         }
