@@ -11,15 +11,32 @@ final class SettingsView: UIView {
 
     // MARK: - Private properties
 
-    private let goPremiumButton = GoPremiumButton()
-    private let containerView = ViewWithGradient(with: .tableGradient)
+    private lazy var goPremiumButton: GoPremiumButton = {
+        let button = GoPremiumButton()
+        button.addAction(
+            UIAction { [weak self] _ in
+                self?.goPremiumButtonTapped?()
+            },
+            for: .touchUpInside
+        )
+        return button
+    }()
+     
     private let settingsTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(SettingsViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.backgroundColor = .clear
+        tableView.layer.cornerRadius = 20
+        tableView.layer.masksToBounds = true
 
         return tableView
     }()
+
+    private let containerView = ViewWithGradient(with: .tableGradient)
+
+    // MARK: - Public properties
+
+    var goPremiumButtonTapped: (() -> Void)?
 
     // MARK: - Initializers
 
@@ -32,28 +49,22 @@ final class SettingsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Setup
-    private func setupView() {
-        addSubview(goPremiumButton)
-        addSubview(containerView)
-        containerView.addSubview(settingsTableView)
-
-        setupEvents()
-        setupConstraints()
-    }
+    // MARK: - Public methods
 
     func setupTableView(dataSource: UITableViewDataSource, delegate: UITableViewDelegate) {
         settingsTableView.dataSource = dataSource
         settingsTableView.delegate = delegate
     }
 
-    private func setupEvents() {
-        goPremiumButton.addAction(
-            UIAction { [weak self] _ in
-                print("faf")
-            },
-            for: .touchUpInside
-        )
+    // MARK: - Private methods
+
+    private func setupView() {
+        setCustomBackground()
+        addSubview(goPremiumButton)
+        addSubview(containerView)
+        containerView.addSubview(settingsTableView)
+
+        setupConstraints()
     }
 
     private func setupConstraints() {

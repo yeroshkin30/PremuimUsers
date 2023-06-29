@@ -42,11 +42,11 @@ final class SettingsViewCell: UITableViewCell {
 
 
     private func setupView() {
-        addSubview(cellImageView)
-        addSubview(titleLabel)
-        addSubview(chevronView)
+        contentView.addSubview(cellImageView)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(chevronView)
         backgroundColor = .clear
-
+        separatorInset = UIEdgeInsets(top: -20, left: 100, bottom: 5, right: 100)
         setupConstraints()
     }
 
@@ -68,7 +68,7 @@ final class SettingsViewCell: UITableViewCell {
         chevronView.layout {
             $0.trailing == trailingAnchor - 15
             $0.top == topAnchor + 10
-            $0.bottom == bottomAnchor + 10
+            $0.bottom == bottomAnchor - 10
         }
     }
 }

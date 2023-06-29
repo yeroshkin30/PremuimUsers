@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsButton: UIButton {
+final class SettingsButton: UIButton {
 
     init() {
         super.init(frame: CGRect())

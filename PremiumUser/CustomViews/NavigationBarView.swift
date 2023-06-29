@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NavigationBarView: UIView {
+final class NavigationBarView: UIView {
 
     // MARK: - Private properties
 
@@ -62,7 +62,7 @@ class NavigationBarView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Setup
+    // MARK: - Private methods
 
     private func setup() {
         addSubview(backButton)

@@ -14,7 +14,7 @@ final class SettingsViewController: UIViewController {
     // MARK: - Private properties
 
     private let navigationBarView = NavigationBarView()
-    private let mainView = SettingsView()
+    private lazy var mainView = SettingsView(frame: view.bounds)
     private let modelItems: [SettingsCellModel]
 
     // MARK: - Initializers
@@ -84,7 +84,6 @@ final class SettingsViewController: UIViewController {
     // MARK: - Setup
 
     private func setup() {
-        setCustomBackground()
         view = mainView
         mainView.setupTableView(dataSource: self, delegate: self)
         view.addSubview(navigationBarView)
@@ -139,6 +138,8 @@ extension SettingsViewController: UITableViewDataSource {
 
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+
         switch SettingsItem.allCases[indexPath.row] {
         case .supportCell:
             supportCellTapped()

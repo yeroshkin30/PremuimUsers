@@ -7,8 +7,8 @@
 
 import UIKit
 
-class ViewWithGradient: UIView {
-    let gradientLayer: CAGradientLayer
+final class ViewWithGradient: UIView {
+    private let gradientLayer: CAGradientLayer
 
     init(with gradient: CAGradientLayer) {
         self.gradientLayer = gradient

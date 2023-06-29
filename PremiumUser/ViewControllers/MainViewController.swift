@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
 
     // MARK: - Private properties
 
@@ -44,7 +44,7 @@ class MainViewController: UIViewController {
     // MARK: - Private methods
 
     private func setup() {
-        setCustomBackground()
+        view.setCustomBackground()
         view.addSubview(settingsButton)
         view.addSubview(mainScreeLabel)
 

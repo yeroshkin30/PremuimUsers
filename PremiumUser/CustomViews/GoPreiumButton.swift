@@ -7,8 +7,16 @@
 
 import UIKit
 
-class GoPremiumButton: UIButton {
-    private let diamondView: UIImageView = .init(image: UIImage(named: "diamond"))
+final class GoPremiumButton: UIButton {
+    private let diamondView: UIImageView =  {
+        let imageView = UIImageView(image: UIImage(named: "diamond"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .clear
+
+        return imageView
+    }()
+
+    // MARK: - Initializers
 
     init() {
         super.init(frame: CGRect())
@@ -18,6 +26,8 @@ class GoPremiumButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: - Setup
 
     func setupButton() {
         var config = UIButton.Configuration.plain()
@@ -30,18 +40,18 @@ class GoPremiumButton: UIButton {
         config.background.backgroundColor = .clear
         config.background.customView = ViewWithGradient(with: .premiumGradient)
         config.cornerStyle = .capsule
-
         configuration = config
 
-        //imagesetup
-        addSubview(diamondView)
-        diamondView.contentMode = .scaleAspectFit
-        diamondView.backgroundColor = .clear
-        diamondView.layout {
+        diamondView.layout(in: self) {
             $0.height == heightAnchor
             $0.leading == leadingAnchor + 15
         }
 
         addShadows()
+    }
+
+    func setupImage() {
+
+
     }
 }

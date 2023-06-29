@@ -16,3 +16,12 @@ extension UIView {
         layer.cornerRadius = 20
     }
 }
+
+extension UIView {
+    func setCustomBackground() {
+        let background = UIImageView(image: UIImage(named: "background"))
+        background.frame = bounds
+        insertSubview(background, at: 0)
+    }
+}
+

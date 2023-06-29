@@ -16,7 +16,6 @@
 		7C193F152A4CB343005FA05E /* SettingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C193F142A4CB343005FA05E /* SettingViewCell.swift */; };
 		7C193F172A4CB50F005FA05E /* AutoLayoutDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C193F162A4CB50F005FA05E /* AutoLayoutDSL.swift */; };
 		7C193F192A4CB798005FA05E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C193F182A4CB798005FA05E /* SettingsView.swift */; };
-		7C193F1B2A4CCACB005FA05E /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C193F1A2A4CCACB005FA05E /* SettingModel.swift */; };
 		7C49154E2A48AEA30021AFD0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7C49154D2A48AEA30021AFD0 /* SnapKit */; };
 		7C4915542A48E8390021AFD0 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C4915532A48E8390021AFD0 /* Roboto-Medium.ttf */; };
 		7C7644102A4B0E85009176C9 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C76440F2A4B0E85009176C9 /* NavigationBarView.swift */; };
@@ -26,8 +25,8 @@
 		7C7644182A4B7596009176C9 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C7644162A4B7596009176C9 /* Roboto-Bold.ttf */; };
 		7C76441A2A4C163F009176C9 /* NavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7644192A4C163F009176C9 /* NavigationController+Extension.swift */; };
 		7C76441C2A4C2A63009176C9 /* ViewWithGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C76441B2A4C2A63009176C9 /* ViewWithGradient.swift */; };
-		7CAF67FA2A49C5A400FF196A /* UIViewController+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF67F92A49C5A400FF196A /* UIViewController+Background.swift */; };
 		7CAF67FE2A49D34300FF196A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF67FD2A49D34300FF196A /* UIColor+Extension.swift */; };
+		7CBA95182A4D798A00671674 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA95172A4D798A00671674 /* SettingModel.swift */; };
 		7CE475AE2A4A00F3000EE36A /* GoPreiumButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE475AD2A4A00F3000EE36A /* GoPreiumButton.swift */; };
 		7CE475B02A4A0BC5000EE36A /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE475AF2A4A0BC5000EE36A /* UIView+Extension.swift */; };
 /* End PBXBuildFile section */
@@ -44,7 +43,6 @@
 		7C193F142A4CB343005FA05E /* SettingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewCell.swift; sourceTree = "<group>"; };
 		7C193F162A4CB50F005FA05E /* AutoLayoutDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AutoLayoutDSL.swift; path = PremiumUser/help/AutoLayoutDSL.swift; sourceTree = SOURCE_ROOT; };
 		7C193F182A4CB798005FA05E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		7C193F1A2A4CCACB005FA05E /* SettingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingModel.swift; path = PremiumUser/SettingModel.swift; sourceTree = SOURCE_ROOT; };
 		7C4915532A48E8390021AFD0 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		7C76440F2A4B0E85009176C9 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
 		7C7644112A4B2232009176C9 /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
@@ -53,8 +51,8 @@
 		7C7644162A4B7596009176C9 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		7C7644192A4C163F009176C9 /* NavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationController+Extension.swift"; sourceTree = "<group>"; };
 		7C76441B2A4C2A63009176C9 /* ViewWithGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWithGradient.swift; sourceTree = "<group>"; };
-		7CAF67F92A49C5A400FF196A /* UIViewController+Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Background.swift"; sourceTree = "<group>"; };
 		7CAF67FD2A49D34300FF196A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		7CBA95172A4D798A00671674 /* SettingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		7CE475AD2A4A00F3000EE36A /* GoPreiumButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoPreiumButton.swift; sourceTree = "<group>"; };
 		7CE475AF2A4A0BC5000EE36A /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,11 +88,10 @@
 		7C02B8F02A4883C200D9D978 /* PremiumUser */ = {
 			isa = PBXGroup;
 			children = (
-				7C193F1A2A4CCACB005FA05E /* SettingModel.swift */,
+				7CBA95162A4D797200671674 /* Models */,
 				7CAF67FB2A49C6B700FF196A /* Extensions */,
 				7CE475B12A4A0CED000EE36A /* CustomViews */,
-				7C02B9052A48842D00D9D978 /* MainViewController.swift */,
-				7C02B9072A488FAF00D9D978 /* SettingsViewController.swift */,
+				7CBA95192A4D799B00671674 /* ViewControllers */,
 				7C02B8FA2A4883C300D9D978 /* Assets.xcassets */,
 				7CAF67FC2A49C6DE00FF196A /* help */,
 				7C02B8FF2A4883C300D9D978 /* Info.plist */,
@@ -106,7 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				7CE475AF2A4A0BC5000EE36A /* UIView+Extension.swift */,
-				7CAF67F92A49C5A400FF196A /* UIViewController+Background.swift */,
 				7CAF67FD2A49D34300FF196A /* UIColor+Extension.swift */,
 				7C7644192A4C163F009176C9 /* NavigationController+Extension.swift */,
 			);
@@ -125,6 +121,23 @@
 				7C02B8FC2A4883C300D9D978 /* LaunchScreen.storyboard */,
 			);
 			path = help;
+			sourceTree = "<group>";
+		};
+		7CBA95162A4D797200671674 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7CBA95172A4D798A00671674 /* SettingModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7CBA95192A4D799B00671674 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7C02B9052A48842D00D9D978 /* MainViewController.swift */,
+				7C02B9072A488FAF00D9D978 /* SettingsViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		7CE475B12A4A0CED000EE36A /* CustomViews */ = {
@@ -227,11 +240,10 @@
 				7C02B8F22A4883C200D9D978 /* AppDelegate.swift in Sources */,
 				7C193F172A4CB50F005FA05E /* AutoLayoutDSL.swift in Sources */,
 				7C76441C2A4C2A63009176C9 /* ViewWithGradient.swift in Sources */,
-				7C193F1B2A4CCACB005FA05E /* SettingModel.swift in Sources */,
+				7CBA95182A4D798A00671674 /* SettingModel.swift in Sources */,
 				7C7644142A4B71EF009176C9 /* SettingsButton.swift in Sources */,
 				7C76441A2A4C163F009176C9 /* NavigationController+Extension.swift in Sources */,
 				7C02B8F42A4883C200D9D978 /* SceneDelegate.swift in Sources */,
-				7CAF67FA2A49C5A400FF196A /* UIViewController+Background.swift in Sources */,
 				7C7644102A4B0E85009176C9 /* NavigationBarView.swift in Sources */,
 				7C02B9082A488FAF00D9D978 /* SettingsViewController.swift in Sources */,
 				7CE475AE2A4A00F3000EE36A /* GoPreiumButton.swift in Sources */,
