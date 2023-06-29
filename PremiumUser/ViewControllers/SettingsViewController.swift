@@ -125,6 +125,9 @@ extension SettingsViewController: UITableViewDataSource {
 
         let model = modelItems[indexPath.row]
         cell.configure(with: model)
+        if indexPath.row == modelItems.count - 1 {
+            cell.hideSeparatorView()
+        }
 
         return cell
     }

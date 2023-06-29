@@ -12,6 +12,14 @@ final class SettingsViewCell: UITableViewCell {
     // MARK: - Private properties
 
     private let cellImageView = UIImageView()
+    private let chevronView = UIImageView(image: UIImage(named: "chevron-right"))
+
+    private let separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .Settings.separator
+
+        return view
+    }()
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -20,8 +28,6 @@ final class SettingsViewCell: UITableViewCell {
 
         return label
     }()
-
-    private let chevronView: UIImageView = .init(image: UIImage(named: "chevron-right"))
 
     // MARK: - Initializers
 
@@ -34,19 +40,25 @@ final class SettingsViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Setup
+    // MARK: - Public methods
+
     func configure(with model: SettingsCellModel) {
         titleLabel.text = model.title
         cellImageView.image = model.image
     }
 
+    func hideSeparatorView() {
+        separatorView.isHidden = true
+    }
+
+    // MARK: - Private methods
 
     private func setupView() {
-        contentView.addSubview(cellImageView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(chevronView)
+        [cellImageView, titleLabel, chevronView, separatorView].forEach {
+            contentView.addSubview($0)
+        }
         backgroundColor = .clear
-        separatorInset = UIEdgeInsets(top: -20, left: 100, bottom: 5, right: 100)
+       
         setupConstraints()
     }
 
@@ -69,6 +81,12 @@ final class SettingsViewCell: UITableViewCell {
             $0.trailing == trailingAnchor - 15
             $0.top == topAnchor + 10
             $0.bottom == bottomAnchor - 10
+        }
+
+        separatorView.layout {
+            $0.height == 1
+            $0.bottom == bottomAnchor
+            $0.width == widthAnchor
         }
     }
 }
